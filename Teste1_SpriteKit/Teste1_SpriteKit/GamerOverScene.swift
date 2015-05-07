@@ -10,16 +10,17 @@ import Foundation
 import SpriteKit
 
 class GameOverScene: SKScene {
+
     
     init(size: CGSize, won:Bool) {
         
         super.init(size: size)
         
         // 1
-        backgroundColor = SKColor.whiteColor()
+        backgroundColor = SKColor(red: 255/255, green: 92/255, blue: 107/255, alpha: 1)
         
         // 2
-        var message = won ? "You Won!" : "You Lose :["
+        var message = won ? "You Won!" : "GAME OVER!!!"
         
         // 3
         let label = SKLabelNode(fontNamed: "Chalkduster")
@@ -45,5 +46,13 @@ class GameOverScene: SKScene {
     // 6
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        if let view = view {
+            let scene = GameScene(size: size)
+         
+            view.presentScene(scene)
+        }
     }
 }

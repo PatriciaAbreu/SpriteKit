@@ -25,27 +25,67 @@ extension SKNode {
     }
 }
 
+
+
 class GameViewController: UIViewController {
 
+    var background: SKSpriteNode!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+//        if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
+//            // Configure the view.
+//            let skView = self.view as! SKView
+//            skView.showsFPS = true
+//            skView.showsNodeCount = true
+//            
+//            /* Sprite Kit applies additional optimizations to improve rendering performance */
+//            skView.ignoresSiblingOrder = true
+//            
+//            /* Set the scale mode to scale to fit the window */
+//            scene.scaleMode = .ResizeFill
+//            
+//            loadBackground(scene)
+//
+//            skView.presentScene(scene)
+        
+        
+//        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
             // Configure the view.
             let skView = self.view as! SKView
             skView.showsFPS = true
+            skView.showsPhysics = true
             skView.showsNodeCount = true
             
             /* Sprite Kit applies additional optimizations to improve rendering performance */
-            skView.ignoresSiblingOrder = true
+            skView.ignoresSiblingOrder = false
             
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .ResizeFill
             
-            skView.presentScene(scene)
+//            loadBackground(scene)
             
-        
+            skView.presentScene(scene)
         }
+    }
+    
+    
+    
+    func loadBackground(scene: GameScene){
+        if background == nil {
+            background = SKSpriteNode(imageNamed: "background")
+            background.name = "background"
+            background.size = scene.size
+            background.position = CGPointMake(scene.size.width/2, scene.size.height/2)
+            scene.addChild(background)
+        }
+        
     }
 
     override func shouldAutorotate() -> Bool {
